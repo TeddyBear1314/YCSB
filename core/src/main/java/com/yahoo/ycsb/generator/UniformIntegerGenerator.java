@@ -44,7 +44,7 @@ public class UniformIntegerGenerator extends IntegerGenerator
 	@Override
 	public long nextInt() 
 	{
-		long ret=Utils.random().nextInt((int)_interval)+_lb;
+		long ret=Utils.random().nextLong(_interval)+_lb;
 		setLastInt(ret);
 		
 		return ret;

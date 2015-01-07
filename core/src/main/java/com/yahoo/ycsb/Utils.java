@@ -17,23 +17,15 @@
 
 package com.yahoo.ycsb;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Utility functions.
  */
 public class Utils
 {
-  private static final Random rand = new Random();
-  private static final ThreadLocal<Random> rng = new ThreadLocal<Random>();
-
-  public static Random random() {
-    Random ret = rng.get();
-    if(ret == null) {
-      ret = new Random(rand.nextLong());
-      rng.set(ret);
-    }
-    return ret;
+  public static ThreadLocalRandom random() {
+    return ThreadLocalRandom.current();
   }
       /**
        * Generate a random ASCII string of a given length.

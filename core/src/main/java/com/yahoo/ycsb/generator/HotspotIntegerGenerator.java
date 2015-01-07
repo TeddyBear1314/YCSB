@@ -16,7 +16,7 @@
  */
 package com.yahoo.ycsb.generator;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.yahoo.ycsb.Utils;
 
@@ -77,15 +77,13 @@ public class HotspotIntegerGenerator extends IntegerGenerator {
   @Override
   public long nextInt() {
     long value = 0;
-    Random random = Utils.random();
+    ThreadLocalRandom random = Utils.random();
     if (random.nextDouble() < hotOpnFraction) {
       // Choose a value from the hot set.
-      // XXX: Possible bug due to lack of nextLong(interval) support?
-      value = lowerBound + random.nextInt((int)hotInterval);
+      value = lowerBound + random.nextLong(hotInterval);
     } else {
       // Choose a value from the cold set.
-      // XXX: Possible bug due to lack of nextLong(interval) support?
-      value = lowerBound + hotInterval + random.nextInt((int)coldInterval);
+      value = lowerBound + hotInterval + random.nextLong(coldInterval);
     }
     setLastInt(value);
     return value;

@@ -94,7 +94,7 @@ public class HistogramGenerator extends IntegerGenerator {
 
 	@Override
 	public long nextInt() {
-		long number = Utils.random().nextInt((int)area);
+		long number = Utils.random().nextLong(area);
 		int i;
 		
 		for(i = 0; i < (buckets.length - 1); i++){
